@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScriberryWindow</class>
+ <widget class="QMainWindow" name="ScriberryWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>971</width>
+    <height>850</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>860</width>
+    <height>780</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>-1</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Scriberry</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow, QWidget#centralwidget {
+    background-color: #121018;
+    color: #f1eef6;
+}
+QWidget {
+    color: #f1eef6;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 13px;
+}
+QLabel { background: transparent; border: none; }
+QLabel#brandMark {
+    background: transparent;
+}
+QLabel#titleLabel { font-size: 27px; font-weight: 700; }
+QLabel#subtitleLabel, QLabel#formatsLabel, QLabel#modelHintLabel,
+QLabel#deviceHintLabel, QLabel#outputHintLabel, QLabel#progressDetailLabel {
+    color: #a7a0b5;
+    font-size: 12px;
+}
+QLabel#badgeLabel, QLabel#fileCountLabel {
+    background: #282031;
+    color: #c9afea;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+QLabel#filesTitleLabel, QLabel#settingsTitleLabel,
+QLabel#outputTitleLabel, QLabel#logsTitleLabel {
+    font-size: 14px;
+    font-weight: 600;
+}
+QLabel#stateLabel { color: #c3addf; font-weight: 600; }
+QLabel#percentLabel { color: #cbb3fa; font-weight: 600; }
+QFrame#filesCard, QFrame#settingsCard, QFrame#outputCard, QFrame#logsCard {
+    background: #1b1723;
+    border: 1px solid #302938;
+    border-radius: 14px;
+}
+QPushButton {
+    background: #2b2435;
+    border: 1px solid #45384f;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-weight: 600;
+}
+QPushButton:hover { background: #392e45; border-color: #8e6fb1; }
+QPushButton:pressed { background: #463652; }
+QPushButton:focus { border: 1px solid #c6a2f3; }
+QPushButton:disabled { color: #756d82; background: #211c29; border-color: #332b3e; }
+QPushButton#startButton {
+    background: #bca1f7;
+    color: #251636;
+    border: 1px solid #bca1f7;
+}
+QPushButton#startButton:hover { background: #cfb6ff; border-color: #cfb6ff; }
+QPushButton#startButton:pressed { background: #a889e0; }
+QPushButton#startButton:disabled { background: #44364f; color: #9c8aaa; border-color: #44364f; }
+QLineEdit, QComboBox {
+    background: #14111b;
+    border: 1px solid #3a3046;
+    border-radius: 8px;
+    padding: 9px 11px;
+    selection-background-color: #60447d;
+    selection-color: #ffffff;
+}
+QLineEdit:focus, QComboBox:focus { border-color: #bca1f7; }
+QComboBox:hover { border-color: #87669f; }
+QComboBox::drop-down { width: 28px; border: none; }
+QComboBox QAbstractItemView {
+    background: #241d2d;
+    border: 1px solid #554164;
+    padding: 5px;
+    selection-background-color: #60447d;
+    selection-color: #ffffff;
+    outline: 0;
+}
+QTreeWidget {
+    background: #14111b;
+    alternate-background-color: #1a1522;
+    border: 1px solid #302938;
+    border-radius: 8px;
+    selection-background-color: #483254;
+    selection-color: #f8f2ff;
+    outline: 0;
+}
+QTreeWidget::item { padding: 8px 5px; border: none; }
+QTreeWidget::item:hover { background: #2a2134; }
+QTreeWidget::item:selected { background: #483254; }
+QHeaderView::section {
+    background: #241d2d;
+    color: #b8aec7;
+    border: none;
+    border-bottom: 1px solid #382d43;
+    padding: 9px 8px;
+    font-size: 12px;
+}
+QPlainTextEdit {
+    background: #14111b;
+    color: #b9b0c7;
+    border: 1px solid #302938;
+    border-radius: 8px;
+    padding: 10px;
+    font-family: &quot;Cascadia Code&quot;, &quot;Consolas&quot;, monospace;
+    font-size: 12px;
+    selection-background-color: #60447d;
+}
+QProgressBar {
+    background: #302637;
+    border: none;
+    border-radius: 5px;
+    min-height: 10px;
+    max-height: 10px;
+}
+QProgressBar::chunk { background: #bca1f7; border-radius: 5px; }
+QScrollBar:vertical { background: #1b1723; width: 10px; margin: 0; }
+QScrollBar::handle:vertical { background: #51405f; min-height: 24px; border-radius: 5px; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: transparent; }
+QToolTip { background: #30243b; color: #f1eef6; border: 1px solid #6f5089; padding: 5px; }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout" stretch="0,3,0,0,1">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="spacing">
+       <number>14</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="brandTextLayout">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="titleLabel">
+          <property name="text">
+           <string>scriberry</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="brandMark">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap>scriberry_logo.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="contentLayout" stretch="5,3">
+      <property name="spacing">
+       <number>18</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="filesCard">
+        <layout class="QVBoxLayout" name="filesLayout">
+         <property name="spacing">
+          <number>12</number>
+         </property>
+         <property name="leftMargin">
+          <number>18</number>
+         </property>
+         <property name="topMargin">
+          <number>18</number>
+         </property>
+         <property name="rightMargin">
+          <number>18</number>
+         </property>
+         <property name="bottomMargin">
+          <number>18</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="filesHeaderLayout">
+           <item>
+            <widget class="QLabel" name="filesTitleLabel">
+             <property name="text">
+              <string>Исходные файлы</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="filesHeaderSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="fileCountLabel">
+             <property name="text">
+              <string>0 файлов</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="sourceButtonsLayout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="selectVideoButton">
+             <property name="toolTip">
+              <string>Выбрать один видеофайл</string>
+             </property>
+             <property name="text">
+              <string>Выбрать видео</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="selectFolderButton">
+             <property name="toolTip">
+              <string>Выбрать папку с видеофайлами</string>
+             </property>
+             <property name="text">
+              <string>Выбрать папку</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="sourcePathEdit">
+           <property name="accessibleName">
+            <string>Выбранный источник</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Путь к видео или папке</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="filesTreeWidget">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="accessibleName">
+            <string>Список выбранных файлов</string>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="uniformRowHeights">
+            <bool>true</bool>
+           </property>
+           <property name="supportedDragActions">
+            <set>Qt::DropAction::CopyAction|Qt::DropAction::MoveAction</set>
+           </property>
+           <attribute name="headerCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="headerDefaultSectionSize">
+            <number>150</number>
+           </attribute>
+           <attribute name="headerHighlightSections">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="headerShowSortIndicator" stdset="0">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="headerStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Файл</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Размер</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Статус</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="formatsLabel">
+           <property name="text">
+            <string>MP4, MKV, MOV, AVI, WEBM и другие видеоформаты</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="settingsCard">
+        <layout class="QVBoxLayout" name="settingsLayout">
+         <property name="spacing">
+          <number>9</number>
+         </property>
+         <property name="leftMargin">
+          <number>18</number>
+         </property>
+         <property name="topMargin">
+          <number>18</number>
+         </property>
+         <property name="rightMargin">
+          <number>18</number>
+         </property>
+         <property name="bottomMargin">
+          <number>18</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="settingsTitleLabel">
+           <property name="text">
+            <string>Настройки распознавания</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="modelLabel">
+           <property name="text">
+            <string>Модель Whisper</string>
+           </property>
+           <property name="buddy">
+            <cstring>modelComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="modelComboBox">
+           <property name="currentIndex">
+            <number>2</number>
+           </property>
+           <item>
+            <property name="text">
+             <string notr="true">tiny</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">base</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">small</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">medium</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">large-v3</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="modelHintLabel">
+           <property name="text">
+            <string>Большие модели требуют больше памяти.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="deviceLabel">
+           <property name="text">
+            <string>Устройство</string>
+           </property>
+           <property name="buddy">
+            <cstring>deviceComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="deviceComboBox">
+           <item>
+            <property name="text">
+             <string notr="true">CPU</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string notr="true">CUDA</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="deviceHintLabel">
+           <property name="text">
+            <string>CUDA — для совместимых видеокарт NVIDIA.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="languageLabel">
+           <property name="text">
+            <string>Язык видео</string>
+           </property>
+           <property name="buddy">
+            <cstring>languageComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="languageComboBox">
+           <item>
+            <property name="text">
+             <string>Автоопределение</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Русский (ru)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>English (en)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Deutsch (de)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Français (fr)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Español (es)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Italiano (it)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Português (pt)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Українська (uk)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Қазақша (kk)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Polski (pl)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Türkçe (tr)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>中文 (zh)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>日本語 (ja)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>한국어 (ko)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>العربية (ar)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>हिन्दी (hi)</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QFrame" name="outputCard">
+      <layout class="QVBoxLayout" name="outputLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>18</number>
+       </property>
+       <property name="topMargin">
+        <number>16</number>
+       </property>
+       <property name="rightMargin">
+        <number>18</number>
+       </property>
+       <property name="bottomMargin">
+        <number>16</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="outputTitleLabel">
+         <property name="text">
+          <string>Папка для сохранения</string>
+         </property>
+         <property name="buddy">
+          <cstring>outputPathEdit</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="outputPathLayout">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="outputPathEdit">
+           <property name="accessibleName">
+            <string>Папка для сохранения</string>
+           </property>
+           <property name="placeholderText">
+            <string>Выберите папку для результатов</string>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="selectOutputButton">
+           <property name="toolTip">
+            <string>Выбрать папку для сохранения результатов</string>
+           </property>
+           <property name="text">
+            <string>Обзор…</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="runLayout" stretch="1,0,0">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="progressLayout">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="stateLayout">
+          <item>
+           <widget class="QLabel" name="stateLabel">
+            <property name="text">
+             <string>Готово к работе</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="stateSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="percentLabel">
+            <property name="text">
+             <string>0%</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="progressBar">
+          <property name="accessibleName">
+           <string>Прогресс распознавания</string>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="progressDetailLabel">
+          <property name="text">
+           <string>Выберите файлы и папку для сохранения.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>44</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Отменить распознавание</string>
+        </property>
+        <property name="text">
+         <string notr="true">Cancel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="startButton">
+        <property name="minimumSize">
+         <size>
+          <width>116</width>
+          <height>44</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Начать распознавание выбранных файлов</string>
+        </property>
+        <property name="text">
+         <string notr="true">Start</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QFrame" name="logsCard">
+      <layout class="QVBoxLayout" name="logsLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>18</number>
+       </property>
+       <property name="topMargin">
+        <number>16</number>
+       </property>
+       <property name="rightMargin">
+        <number>18</number>
+       </property>
+       <property name="bottomMargin">
+        <number>16</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="logsTitleLabel">
+         <property name="text">
+          <string>Журнал событий</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="logTextEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>Статус и логи распознавания</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="maximumBlockCount">
+          <number>2000</number>
+         </property>
+         <property name="placeholderText">
+          <string>Здесь появятся статус обработки, сообщения и ошибки.</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>selectVideoButton</tabstop>
+  <tabstop>selectFolderButton</tabstop>
+  <tabstop>sourcePathEdit</tabstop>
+  <tabstop>filesTreeWidget</tabstop>
+  <tabstop>modelComboBox</tabstop>
+  <tabstop>deviceComboBox</tabstop>
+  <tabstop>languageComboBox</tabstop>
+  <tabstop>outputPathEdit</tabstop>
+  <tabstop>selectOutputButton</tabstop>
+  <tabstop>startButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>logTextEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
