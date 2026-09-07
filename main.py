@@ -1,5 +1,5 @@
-from faster_whisper import WhisperModel
 from pathlib import Path
+from faster_whisper import WhisperModel
 
 test_video = Path(__file__).parent / 'whisper_test.mp4'
 
