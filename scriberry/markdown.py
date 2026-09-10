@@ -13,5 +13,5 @@ def render_markdown(heading: str, segments: list[TranscriptSegment]):
         line = f"- **[{format_timestamp(segment.start)} -> {format_timestamp(segment.end)}]** {segment.text.strip()}\n"
         lines.append(line)
 
-    return "".join(lines)
+    return "\n".join(lines)
 
