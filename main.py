@@ -1,13 +1,14 @@
 from pathlib import Path
+from PySide6.QtWidgets import QApplication
+
 from scriberry.transcriber import WhisperTranscriber
+from scriberry.gui.main_window import MainWindow
 
 test_video = Path(__file__).parent / 'whisper_test.mp4'
 
-transcriber = WhisperTranscriber(
-    model_size="small",
-    device="cpu",
-    compute_type="int8"
-)
+app = QApplication([])
 
-test = transcriber.transcribe(test_video)
-print(test)
+window = MainWindow()
+window.show()
+
+app.exec()
