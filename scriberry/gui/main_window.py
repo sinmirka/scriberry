@@ -10,15 +10,20 @@ class MainWindow(QMainWindow):
         self.ui = Ui_ScriberryWindow()
         self.ui.setupUi(self)
 
+        self._default_output_dir = Path(__file__).parent.parent.parent / "output"
         self._selected_files: list[Path] = []
-        self._output_directory: Path | None = None
+        self._output_directory: Path | None = self._default_output_dir
 
         self._connect_signals()
+        self._update_window()
 
     def _connect_signals(self):
         self.ui.selectVideoButton.clicked.connect(
             self._select_source
         )
+
+    def _update_window(self):
+        self.ui.outputPathEdit.setText(str(self._default_output_dir))
 
     def _select_source(self):
         file_path, _ = QFileDialog.getOpenFileName(
@@ -44,3 +49,10 @@ class MainWindow(QMainWindow):
         self.ui.fileCountLabel.setText(
             f"{len(self._selected_files)} файлов"
         )
+
+    def _select_output_folder(self):
+        folder, _ = QFileDialog.getOpenFileName(self)
+        if not folder:
+            return
+
+        self._output_directory = Path(folder)
