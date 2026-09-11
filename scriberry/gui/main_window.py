@@ -14,6 +14,8 @@ class MainWindow(QMainWindow):
         self._selected_files: list[Path] = []
         self._output_directory: Path | None = self._default_output_dir
 
+        self.ui.outputPathEdit.setText(str(self._default_output_dir))
+
         self._connect_signals()
         self._update_window()
 
@@ -22,8 +24,14 @@ class MainWindow(QMainWindow):
             self._select_source
         )
 
+        self.ui.selectOutputButton.clicked.connect(
+            self._select_output_folder
+        )
+
     def _update_window(self):
-        self.ui.outputPathEdit.setText(str(self._default_output_dir))
+        self.ui.outputPathEdit.setText(
+            str(self._output_directory)
+        )
 
     def _select_source(self):
         file_path, _ = QFileDialog.getOpenFileName(
@@ -51,8 +59,9 @@ class MainWindow(QMainWindow):
         )
 
     def _select_output_folder(self):
-        folder, _ = QFileDialog.getOpenFileName(self)
+        folder = QFileDialog.getExistingDirectory(self)
         if not folder:
             return
 
         self._output_directory = Path(folder)
+        self._update_window()
